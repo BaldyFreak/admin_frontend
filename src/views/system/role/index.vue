@@ -137,8 +137,6 @@
           <el-dropdown size="mini" @command="(command) => handleCommand(command, scope.row)" v-hasPermi="['system:role:edit']">
             <el-button size="mini" type="text" icon="el-icon-d-arrow-right">更多</el-button>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="handleDataScope" icon="el-icon-circle-check"
-                v-hasPermi="['system:role:edit']">数据权限</el-dropdown-item>
               <el-dropdown-item command="handleAuthUser" icon="el-icon-user"
                 v-hasPermi="['system:role:edit']">分配用户</el-dropdown-item>
             </el-dropdown-menu>
@@ -457,9 +455,6 @@ export default {
     // 更多操作触发
     handleCommand(command, row) {
       switch (command) {
-        case "handleDataScope":
-          this.handleDataScope(row);
-          break;
         case "handleAuthUser":
           this.handleAuthUser(row);
           break;
@@ -530,21 +525,6 @@ export default {
       if(value !== '2') {
         this.$refs.dept.setCheckedKeys([]);
       }
-    },
-    /** 分配数据权限操作 */
-    handleDataScope(row) {
-      this.reset();
-      const deptTreeSelect = this.getDeptTree(row.roleId);
-      getRole(row.roleId).then(response => {
-        this.form = response.data;
-        this.openDataScope = true;
-        this.$nextTick(() => {
-          deptTreeSelect.then(res => {
-            this.$refs.dept.setCheckedKeys(res.checkedKeys);
-          });
-        });
-        this.title = "分配数据权限";
-      });
     },
     /** 分配用户操作 */
     handleAuthUser: function(row) {
