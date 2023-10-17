@@ -191,7 +191,7 @@ export default {
             treeCode: genTable.treeCode,
             treeName: genTable.treeName,
             treeParentCode: genTable.treeParentCode,
-            parentMenuId: genTable.parentMenuId
+            parentMenuId: genTable.parentMenuId.toString()
           };
           updateGenTable(genTable).then(res => {
             this.$modal.msgSuccess(res.msg);
