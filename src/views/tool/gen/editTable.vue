@@ -187,12 +187,12 @@ export default {
         if (validateResult) {
           const genTable = Object.assign({}, basicForm.model, genForm.model);
           genTable.columns = this.columns;
-          genTable.parentMenuId = genTable.parentMenuId.toString()//改变类型,因为aspnetcore中params是dictonary<string,string>,ruoyi是dictonary<string,object>
+          let parentMenuId = genTable.parentMenuId || ''//改变类型,因为aspnetcore中params是dictonary<string,string>,ruoyi是dictonary<string,object>
           genTable.params = {
             treeCode: genTable.treeCode,
             treeName: genTable.treeName,
             treeParentCode: genTable.treeParentCode,
-            parentMenuId: genTable.parentMenuId
+            parentMenuId: parentMenuId.toString()
           };
           updateGenTable(genTable).then(res => {
             this.$modal.msgSuccess(res.msg);
