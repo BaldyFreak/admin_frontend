@@ -37,7 +37,19 @@ import DictTag from '@/components/DictTag'
 import VueMeta from 'vue-meta'
 // 字典数据组件
 import DictData from '@/components/DictData'
+//地图坐标组件
+import AmapVue, { Amap } from '@amap/amap-vue';
 
+AmapVue.config.version = '2.0'; // 默认2.0，这里可以不修改
+AmapVue.config.key = 'ecf461ba73401a6901c55a0164228ca9';
+AmapVue.config.plugins = [
+  'AMap.ToolBar',
+  'AMap.MoveAnimation'
+  // 在此配置你需要预加载的插件，如果不配置，在使用到的时候会自动异步加载
+];
+window._AMapSecurityConfig = {
+  securityJsCode: "79af54a2d06a81df191497f069f5eaa0",
+}
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey
@@ -58,6 +70,7 @@ Vue.component('FileUpload', FileUpload)
 Vue.component('ImageUpload', ImageUpload)
 Vue.component('ImagePreview', ImagePreview)
 
+Vue.use(AmapVue);
 Vue.use(directive)
 Vue.use(plugins)
 Vue.use(VueMeta)
